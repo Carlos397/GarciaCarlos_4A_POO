@@ -64,14 +64,6 @@ class Coches:
     def frenar(self):
         self._velocidad -= 1
 
-    def insertar(self):
-        try: 
-            cursor.execute("insert into coches VALUES (NULL , %s, %s, %s, %s, %s, %s)", (self.marca, self.color, self.modelo, self.velocidad, self.potencia, self.asientos))
-            conexion.commit()
-            return True
-        except:
-            return False
-
     @staticmethod
     def consultar():
         try:
@@ -88,6 +80,14 @@ class Coches:
             return True
         except:
             return False
+            
+    def insertar(self):
+        try: 
+            cursor.execute("insert into coches VALUES (NULL , %s, %s, %s, %s, %s, %s)", (self.marca, self.color, self.modelo, self.velocidad, self.potencia, self.asientos))
+            conexion.commit()
+            return True
+        except:
+            return False
 
     def actualizar(self, id):
         try:
@@ -97,64 +97,3 @@ class Coches:
         except:
             return False
 
-
-class Camiones(Coches):
-    def __init__(self, color, marca, velocidad, modelo, potencia, asientos, eje, capacidadCarga):
-        super().__init__(color, marca, velocidad, modelo, potencia, asientos)
-        self.__eje = eje
-        self.__capacidadCarga = capacidadCarga
-
-
-
-    def cargar(self, tipo_carga):
-        print(f"El tipo de carga es: {tipo_carga}")
-
-    def acelerar(self):
-        self._velocidad += 1
-        print("Estoy acelerando como una camión")
-
-    def frenar(self):
-        self._velocidad -= 1
-        print("Estoy frenando como una camión")
-
-    @property
-    def _eje(self):
-        return self.__eje
-
-    @_eje.setter
-    def _eje(self, value):
-        self.__eje = value
-
-    @property
-    def _capacidadCarga(self):
-        return self.__capacidadCarga
-
-    @_capacidadCarga.setter
-    def _capacidadCarga(self, value):
-        self.__capacidadCarga = value
-    
-class Camionetas(Coches):
-    def __init__(self, color, marca, velocidad, modelo, potencia, asientos, traccion, cerrada):
-        super().__init__(color, marca, velocidad, modelo, potencia, asientos)
-        self.__traccion = traccion
-        self.__cerrada = cerrada
-
-    @property
-    def _traccion(self):
-        return self.__traccion
-
-    @_traccion.setter
-    def _traccion(self, value):
-        self.__traccion = value
-
-    @property
-    def _cerrada(self):
-        return self.__cerrada
-
-    @_cerrada.setter
-    def _cerrada(self, value):
-        self.__cerrada = value
-
-
-    def transoportar(self, num_pasajeros):
-        print(f"El numero de pasajeros de la camioneta es: {num_pasajeros}")

@@ -54,9 +54,10 @@ class App:
                 case "3":
                     self.borrarPantalla()
                     id = int(input("Ingresa el ID del estudiante a modificar: ").strip())
-                    respuesta = estudiantes.Estudiantes(id)
                     nombre = input("Ingresa el nuevo nombre: ").strip()
-                    nota = input("Ingresa la nueva nota: ").strip()
+                    nota = int(input("Ingresa la nueva nota: ").strip())
+                    estudiante = estudiantes.Estudiantes(nombre, nota)
+                    respuesta = estudiante.actualizar(id)
                     self.respuesta_sql(respuesta)
                     del estudiante
 
